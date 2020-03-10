@@ -71,6 +71,5 @@ openapi-spec-validator==0.2.8
 Sphinx==2.2.0
 sphinx-rtd-theme==0.4.3
 requests>=2.20.0
-WTForms==2.2.1
 APScheduler==3.6.1
 passlib==1.7.1
