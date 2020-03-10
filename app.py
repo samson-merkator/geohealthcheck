@@ -37,6 +37,7 @@ from io import StringIO
 from flask import (abort, flash, g, jsonify, redirect,
                    render_template, request, url_for)
 from flask_babel import gettext
+#from flask.ext.babel import Babel
 from flask_login import (LoginManager, login_user, logout_user,
                          current_user, login_required)
 from flask_migrate import Migrate
