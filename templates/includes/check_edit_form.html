@@ -1,0 +1,82 @@
+<table class="table table-condensed table-bordered check-entry resource-probe-check" data-check-class="{{ check.check_class }}">
+    <tr>
+        <td>
+            <table class="table">
+                <tr>
+                    <td>
+                        <strong>Check: {{ check_info.NAME }}</strong>
+                        <br/><i>Check: {{ check_info.DESCRIPTION }}</i>
+                    </td>
+                    <td width="20%">
+                        <button type="button"
+                                class="button-resource-probe-check-delete btn btn-danger btn-xs">{{ _('Delete') }}
+                        </button>
+                    </td>
+                </tr>
+                {% if check.parameters %}
+                <tr>
+                    <td>
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <i>Check Parameters</i>
+                                    <table class="table">
+                                        {% for param in check.parameters %}
+                                        <tr>
+                                            <td>{{ param }}</td>
+                                            <td>
+                                                {% set check_param_val = check.parameters[param] %}
+                                                {% set check_param_type = check_info.PARAM_DEFS[param]['type'] %}
+                                                {% set check_param_range = check_info.PARAM_DEFS[param]['range']  %}
+                                                {% set check_param_default = check_info.PARAM_DEFS[param]['default']  %}
+
+                                                {% if check_param_type == 'bbox' or check_param_type == 'stringlist' %}
+                                                {% set check_param_type = 'list' %}
+                                                {% set check_param_val = check_param_val|join(',') %}
+                                                {% endif %}
+                                                <!-- parameters: use select box when range defined, else regular input box -->
+                                                {% if check_param_range %}
+                                                <select class="form-control" data-check-param="{{ param }}"
+                                                        data-check-param-type="{{ check_param_type }}">
+                                                    <!-- select box for range: select value if defined else use default value if defined -->
+                                                    {% for check_param_range_val in check_param_range %}
+                                                      {% set selected = '' %}
+           
+                                                      {% if check_param_val %}
+                                                        {% if check_param_val == check_param_range_val %}
+                                                          {% set selected = 'selected' %}
+                                                        {% endif %}
+                                                      {% elif  check_param_default %}
+                                                        {% if check_param_default == check_param_range_val %}
+                                                          {% set selected = 'selected' %}
+                                                        {% endif %}
+                                                      {% endif %}
+                                                    <option value="{{ check_param_range_val }}" {{ selected }}>{{ check_param_range_val }}</option>
+                                                    {% endfor %}
+                                                </select>
+           
+                                                {% else %}
+                                                <!-- regular input box: set readonly if fixed value defined -->
+                                                <input data-check-param="{{ param }}" data-check-param-type="{{ check_param_type }}" type="text"
+                                                       value="{{ check_param_val }}"
+                                                       style="width: 100%;"
+                                                {% if 'value' in check_info.PARAM_DEFS[param] %}
+                                                   readonly="true"
+                                                 {% endif %}
+                                                 />
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                {% endif %}
+            </table>
+        </td>
+    </tr>
+</table>

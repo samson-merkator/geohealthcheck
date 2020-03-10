@@ -1,0 +1,27 @@
+{{ _('Hi: this is a status report sent by the') }} "{{ config.GHC_SITE_TITLE }}" {{ _('service') }}
+{{ _('at') }} {{ config.GHC_SITE_URL }} {{ _('for the GeoHealthCheck endpoint at') }} {{ summary.site_url }}
+
+== {{ _('Monitoring Period') }} ==
+{{ _('From') }}: {{ summary.first_run.checked_datetime }}
+{{ _('To') }}: {{ summary.last_run.checked_datetime }}
+
+== {{ _('Status') }} ==
+{{ _('Resources') }}: {{ summary.total }}
+{{ _('Operational') }}: {{ summary.success.number }}
+{{ _('Failing') }}: {{ summary.fail.number }}
+{{ _('Reliability') }}: {{ summary.reliability }}%
+
+== {{ _('Failing') }} {{ _('Resources') }} ==
+{% for resource in summary.failed_resources %}
+[{{resource.identifier}}] - "{{resource.title}}"
+  {{ _('Reliability') }}: {{ resource.reliability }}%
+  {{ _('URL') }}: {{ resource.url }}
+  {{ _('Owner') }}: {{ resource.owner }}
+  {{ _('Details') }}: {{ summary.site_url }}/resource/{{resource.identifier}}
+{% endfor %}
+{% if summary.failed_resources|length == 0 %}{{ _('None') }}!{% endif %}
+== {{ _('Links') }} ==
+{{ _('Home') }}: {{ summary.site_url  }}
+{{ _('Summary') }} JSON: {{ summary.site_url }}/api/v1.0/summary
+{{ _('Summary') }} TXT: {{ summary.site_url }}/api/v1.0/summary.txt
+{{ _('Status') }}  CSV: {{ summary.site_url }}/csv

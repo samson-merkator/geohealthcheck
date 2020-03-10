@@ -1,0 +1,574 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="col-xs-9 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">[{{ _('Edit') }}] <span id="resource_title_h1">{{ resource.title }}</span></h1>
+
+    <div class="table-responsive">
+        <table class="table" style="table-layout: fixed;">
+            <tr>
+                <th>{{ _('Type') }}</th>
+                <td>{{ resource_types[resource.resource_type]['label'] }}</td>
+            </tr>
+            <tr>
+                <th>
+                    {{ _('Active') }}
+                </th>
+                <td>
+                    <input type="checkbox" id="input_resource_active" name="resource_active_value" {{ 'checked' if resource.active == true else '' }}/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ _('Authentication') }}
+                </th>
+                <td>
+                    <label>{{ _('Select optional authentication method and applicable credentials') }}</label>
+                    {% set rsc_auth_type  = resource.auth_type  %}
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <select class="form-control" id="select_resource_auth_type" name="select_resource_auth_type_val">
+                                 <!-- select box auth type, default None -->
+                                 {% for auth_type in auths_avail %}
+                                    {% set selected = '' %}
+                                    {% if auth_type == rsc_auth_type %}
+                                       {% set selected = 'selected' %}
+                                    {% endif %}
+                                 <option value="{{ auth_type }}" {{ selected }}>{{ auth_type }}</option>
+                                 {% endfor %}
+                             </select>
+                        </div>
+                        {% for auth_type in auths_avail %}
+                            {% set auth_def = auths_avail[auth_type] %}
+                            {% for auth_param in auth_def.PARAM_DEFS %}
+                                {% set auth_param_def = auth_def.PARAM_DEFS[auth_param] %}
+                                {% set input_visibility = 'none' %}
+                                {% set input_type = 'text' %}
+                                {% set auth_param_val = '' %}
+
+                                {% if auth_type == rsc_auth_type %}
+                                    {% set input_visibility = 'inline' %}
+                                    {% set auth_param_val = resource.auth['data'][auth_param] %}
+                                {% endif %}
+                                {% if auth_param_def['type'] == 'password' %}
+                                    {% set input_type = 'password' %}
+                                {% endif %}
+                                <div class="col-xs-4 auth-input-row" data-auth-type="{{ auth_type }}" style="display: {{ input_visibility }};">
+                                    <input type="{{ input_type }}" class="form-control" name="data-auth" data-auth-type="{{ auth_type }}" data-auth-param="{{ auth_param }}" class="form-control"  value="{{ auth_param_val }}" placeholder="{{ auth_param_def['description'] }}">
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <th>{{ _("Notify emails") }}</th>
+                <td>
+                    <label>{{ _('You can enter multiple emails separated with comma') }}</label>
+                    <input type="text" class="form-control" id="input_resource_notify_emails" name="resource_notify_emails_value" value="{{ resource.get_recipients('email')|join(', ') }}"/>
+                </td>
+            </tr>
+
+            <tr>
+                <th>{{ _("Notify webhooks") }}</th>
+                <td class="webhook">
+                    <div class="container-fluid">
+                        {% for whook in resource.get_recipients('webhook') %}
+                        <div class="whook_container">
+                            <textarea class="form-control" cols="150" name="resource_notify_webhooks_value">{{ whook }}</textarea>
+                            <br/>
+                            <span title="remove webhook configuration" class="remove glyphicon glyphicon-minus text-left"></span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="control-label">
+                        <label>{{ _("Enter url for webhook.")}}
+                               {{ _("Optionally, enter payload as list of key=value lines or JSON object.") }}
+                        </label>
+                    </div>
+
+                    <div class="whook_container template">
+                        <textarea class="form-control" cols="150" name="resource_notify_webhooks_value" placeholder="http://url/path
+
+field_name=value
+or
+{'field_name': 'value'}
+"></textarea>
+                        <span class="hidden remove glyphicon glyphicon-minus"></span>
+                    </div>
+                    <div class="text">
+                        <span title="add webhook configuration" class="add glyphicon glyphicon-plus"></span>
+                    </div>
+                </td>
+
+            </tr>
+
+            <tr>
+                <th>{{ _('Owner') }}</th>
+                <td>{{ resource.owner.username }}</td>
+            </tr>
+            <tr>
+                <th>
+                    {{ _('Name') }}
+                </th>
+                <td>
+                    <input type="text" class="form-control" id="input_resource_title" name="resource_title_value" value="{{ resource.title }}" />
+                </td>
+            </tr>
+            <tr>
+                <th>URL</th>
+                <td><a href="{{ resource.get_capabilities_url }}">{{ resource.url }}</a></td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>
+                    <select id="resource_tags" multiple="multiple">
+                    {% for tag in resource.tags %}
+                        <option value="{{ tag.name }}" selected="selected">{{ tag.name }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>{{ _('Run Every') }}</th>
+                <td>
+                    <input type="number" id="input_resource_frequency" name="resource_frequency_value" min="{{ config['GHC_MINIMAL_RUN_FREQUENCY_MINS'] }}" value="{{ resource.run_frequency }}" style="width: 5%;"/> <label>{{ _('minutes') }}</label>
+                </td>
+            </tr>
+            <tr>
+                <th>Probes</th>
+
+                <td id="probe-edit-forms">
+                    {% for probe in resource.probe_vars %}
+                        {% set probe_info = probes_avail[probe.probe_class] %}
+                        {% include 'includes/probe_edit_form.html' %}
+                    {% endfor %}
+                </td>
+
+            </tr>
+            <tr>
+                <th>Probes<br/>Available</th>
+
+                <td>
+                    {% for probe_class, probe_avail in probes_avail.items() %}
+                        {% include 'includes/probe_info.html' %}
+                    {% endfor %}
+                </td>
+
+            </tr>
+            {% if g.user.role == 'admin' or g.user.username == resource.owner.username %}
+            <tr>
+                <th>{{ _('Status') }}</th>
+
+                <td>
+                    <div><span id="status">OK</span>&nbsp;&nbsp;<span><button type="button" id="toggle-status-detail"
+                                        class="btn btn-success btn-xs">{{ _('Details') }}
+                                </button></span></div>
+                    <br/><span id="status-detail"></span>
+                </td>
+
+            </tr>
+            <tr>
+                <th>Action</th>
+
+                <td>
+                    <button id="save" type="button" class="btn btn-primary btn-sm">{{ _('Save') }}</button>
+                    &nbsp;&nbsp;&nbsp;<button id="test" type="button" class="btn btn-primary btn-sm">{{ _('Test') }}</button>
+                    &nbsp;&nbsp;&nbsp;<a href="{{ url_for('get_resource_by_id', lang=g.current_lang, identifier=resource.identifier) }}"><button id="title_cancel" type="button" class="btn btn-primary btn-sm">{{ _('Cancel') }}</button></a>
+                    &nbsp;&nbsp;&nbsp;<a href="{{ url_for('delete', lang=g.current_lang, resource_identifier=resource.identifier) }}"><button id="confirm-delete" type="button" class="btn btn-danger btn-sm">{{ _('Delete') }}</button></a>
+                </td>
+            </tr>
+            {% endif %}
+
+        </table>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+</div>
+{% endblock %}
+{% block extrafoot %}
+
+<script src="{{ url_for('static', filename='lib/jqueryui/jquery-ui.js') }}"></script>
+<link href="{{ url_for('static', filename='lib/jqueryui/jquery-ui.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='lib/jqueryui/jquery-ui.structure.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='lib/jqueryui/jquery-ui.theme.css') }}" rel="stylesheet">
+
+<script type="text/javascript">
+    var all_tags = {{ tagnames|tojson }};
+    $('#resource_tags').select2({data: all_tags, tags: true, disabled: false});
+    // var probes_json = '{{ probes_avail|tojson }}';
+    // probes_available = JSON.parse(probes_json);
+
+    {% if g.user.is_authenticated %}
+
+    // Show input elements for selected Resource auth
+    $('#select_resource_auth_type').change(function(){
+        var selectedAuth = $(this).children("option:selected").val();
+        $('.auth-input-row').each(function (key, elem) {
+            var elm = $(elem);
+
+            // First hide all inputs
+            elm.css("display","none");
+
+            // Only inputs for selected auth type visible
+            if (elm.data('auth-type') === selectedAuth) {
+                elm.css("display","inline");
+            }
+        });
+    });
+
+    function get_probe_entry(button) {
+        // Find parent Probe entry and the detail div therein
+        return $(button).closest('.probe-entry');
+    }
+
+    function get_probe_detail(button) {
+        // Find parent Probe entry and the detail div therein
+        var probe_entry = get_probe_entry(button);
+        return $('.probe-detail', probe_entry);
+    }
+
+    function toggle_probe_details(button) {
+//        var probe_entry = get_probe_entry(button);
+//        $(probe_entry).toggleClass('table-inverse');
+        var probe_detail = get_probe_detail(button);
+
+        if( $(probe_detail).css('display') == 'none' ) {
+            $('.probe-detail').hide();
+            $(probe_detail).show();
+        } else {
+            $('.probe-detail').hide();
+            $('button').blur();
+        }
+    }
+
+    // As Probe entry element may be appended dynamically need this construct
+    $(document).on('click','.button-resource-probe-edit',function(){
+        toggle_probe_details(this);
+        return false;
+    });
+
+    $(document).on('click','.button-resource-probe-delete',function(){
+        var probe_entry = get_probe_entry(this);
+        $(probe_entry).remove();
+    });
+
+    $(".button-probes-avail-add").click(function(){
+        var probe_entry = get_probe_detail(this);
+        var probe_class = $(probe_entry).attr('data-probe-class');
+
+        // Issue #128: must use generated URL, but we do not yet have Probe class.
+        // use dummy name and later substitute actual probe class
+        var url = "{{ url_for('get_probe_edit_form', probe_class='dummy', resource_identifier=resource.identifier) }}";
+        url = url.replace('dummy', probe_class);
+
+        $.get(url, function(result) {
+            $('#probe-edit-forms').append(result);
+        }).fail(function() {
+            $('#probe-edit-forms').append('<br/><strong>Error getting Probe form for ' + probe_class + '</strong>');
+        });
+        return false;
+    });
+
+    $(".button-probes-avail-info").click(function(){
+        toggle_probe_details(this);
+        return false;
+    });
+
+    /* Check Element Management */
+
+    function get_check_entry(button) {
+        // Find parent Check entry and the detail div therein
+        return $(button).closest('.check-entry');
+    }
+
+    $(document).on('click','.button-resource-probe-check-delete',function(){
+        var entry = get_check_entry(this);
+        $(entry).remove();
+    });
+
+    $(document).on('click','.button-checks-avail-add',function(){
+        var check_class = $(this).attr('data-check-class');
+        var button = this;
+        // Issue #128: must use generated URL, but we do not yet have Probe class.
+        // use dummy name and later substitute actual probe class
+        var url = "{{ url_for('get_check_edit_form', check_class='dummy') }}";
+        url = url.replace('dummy', check_class);
+
+        $.get(url, function(result) {
+            // Find the active Checks element within the Probe form
+            // and append Check.
+            var probe_form = $(button).closest('.resource-probe-edit');
+            var check_edit_forms = $(probe_form).find('.check-edit-forms');
+            $(check_edit_forms).append(result);
+        }).fail(function() {
+            $('.check-edit-forms').append('<br/><strong>Error getting Check form for ' + check_class + '</strong>');
+        });
+        return false;
+    });
+
+    /* Resource Probe actions. */
+    $('#toggle-status-detail').hide();
+
+    $('#save').click(function() {
+        $('#toggle-status-detail').hide();
+        
+        // Resource auth: get and map input elements for auth type
+        var auth_type = $('select[name="select_resource_auth_type_val"]').val();
+        var new_auth = {
+            'type': auth_type,
+            'data': {}
+        };
+
+        // Gather form data from auth input elements related to type
+        var new_auth_data = new_auth['data'];
+        $('input[name=data-auth]').each(function (key, input) {
+            var elm = $(input);
+            // Only get form data for selected auth type
+            if (elm.data('auth-type') !== auth_type) {
+                return;
+            }
+            new_auth_data[elm.data('auth-param')] = elm.val();
+        });
+        
+        // Collect title
+        var new_title = $('input[name="resource_title_value"]').val();
+
+        // Collect tags
+        var new_tags = $('#resource_tags').val();
+
+        // Collect test_frequency
+        var new_frequency = $('input[name="resource_frequency_value"]').val();
+
+        // Collect active
+        var new_active = $('#input_resource_active').prop('checked');
+
+        // Collect recipients
+        var new_notify_emails = $('#input_resource_notify_emails').val().split(',');
+        var new_notify_webhooks = [];
+
+        $('textarea[name="resource_notify_webhooks_value"]').each(function(idx, elm){
+            // skip template elements
+            var val = $(elm).val();
+            if (val === '') {
+                return;
+            }
+            new_notify_webhooks.push(val);
+        });
+
+        // Collect Probes with parameters and contained Checks
+        // also with parameters
+        var new_probes = [];
+        var probe_data = $('.resource-probe-data');
+        probe_data.each(function (key, table) {
+            var probe_class = $(table).attr('data-probe-class');
+            var probe_map = {
+                'probe_class': probe_class,
+                'parameters': {},
+                'checks': []
+            };
+
+            // Collect this Probe's parameters from
+            // input and select (range values) elements
+            var parameters = {};
+            $('input[data-probe-param],select[data-probe-param]', table).each(function (key, input) {
+                var param_name = $(input).attr('data-probe-param');
+                var param_val = $.trim($(input).val());
+                var param_type = $(input).attr('data-probe-param-type');
+                if (param_type == 'list') {
+                    param_val = param_val.split(',');
+                }
+                parameters[param_name] = param_val;
+            });
+            probe_map['parameters'] = parameters;
+
+            // Collect this Probe's Checks with parameters
+            var checks_data = $('.resource-probe-checks', table);
+            var checks = probe_map['checks'];
+            $('.resource-probe-check', checks_data).each(function (key, check) {
+                var check_entry = {
+                   'check_class': $(check).attr('data-check-class'),
+                    'parameters': {}
+                };
+
+                // Parameters from input elements
+                var parameters = {};
+                $('input[data-check-param],select[data-check-param]', check).each(function (key, input) {
+                    var param_name = $(input).attr('data-check-param');
+                    var param_val = $.trim($(input).val());
+                    var param_type = $(input).attr('data-check-param-type');
+                    if (param_type == 'list') {
+                        param_val = param_val.split(',');
+                    }
+                    parameters[param_name] = param_val;
+                });
+                check_entry['parameters'] = parameters;
+                checks.push(check_entry);
+            });
+
+            probe_map['checks'] = checks;
+            new_probes.push(probe_map);
+        });
+
+        $('#status').text("{{ _('Save') }}...");
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for('update', resource_identifier=resource.identifier) }}",
+            data: JSON.stringify({
+                auth: new_auth,
+                title: new_title,
+                active: new_active,
+                tags: new_tags,
+                run_frequency: new_frequency,
+                probes: new_probes,
+                notify_emails: new_notify_emails,
+                notify_webhooks: new_notify_webhooks
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                $('#resource_title_h1').html(new_title);
+                $('#status').text("{{ _('Save') }}: " + data.status);
+                $('#save').blur();
+            },
+            error: function(data, msg, details) {
+                $('#status').text("{{ _('ERROR') }} " + msg + ": " + details);
+                $('#save').blur();
+            }
+        });
+        return false;
+    });
+
+    $('#test').click(function() {
+         $('#toggle-status-detail').hide();
+         $('#status').text("{{ _('Test') }}...");
+         $.ajax({
+             type: "POST",
+             url: "{{ url_for('test', lang=g.current_lang, resource_identifier=resource.identifier) }}",
+             data: JSON.stringify({}),
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             success: function(data){
+                 $('#status').text('{{ _("Test") }}: result=' + data.success);
+                 $('#toggle-status-detail').show();
+                 // Format JSON: http://jsfiddle.net/K83cK
+                 $('#status-detail').html('<pre>' + JSON.stringify(data, undefined, 2) + '</pre>').hide();
+                 $('#test').blur();
+             },
+             error: function(errMsg) {
+                 $('#status').text("{{ _('Test') }}: success=" + errMsg);
+                 $('#test').blur();
+             }
+         });
+         return false;
+     });
+
+    $('#toggle-status-detail').click(function(button) {
+        var detail = $('#status-detail');
+        if ($(detail).css('display') == 'none')  {
+            $(detail).show();
+        } else {
+            $(detail).hide();
+            $('button').blur();
+        }
+
+        return false;
+    });
+
+    $('#confirm-delete').click(function() {
+        if (confirm('{{ _('Delete resource') }} "{{ resource.title }}"?') === false) {
+            $('#confirm-delete').blur();
+            return false;
+        }
+    });
+
+    // webhook ui - remove entries, add new
+
+
+    var wh_remove_cb = function(ui){
+        $('span.remove', ui).click(function(){
+            ui.remove();
+        });
+    }
+
+    var wh = $('td.webhook');
+    var whc = $('.container-fluid', wh);
+
+    $('span.add', wh).click(function(){
+        var template = $('.template', wh);
+        var new_item = template.clone().removeClass('template');
+        $('.hidden', new_item).removeClass('hidden');
+        whc.append(new_item);
+        template.find('textarea').val('');
+        wh_remove_cb(new_item);
+    });
+
+    $('.whook_container', wh).each(function(idx, elm){
+            wh_remove_cb($(elm));
+    });
+
+
+    // autocomplete for notifications
+    var emails = {{ suggestions|safe }};
+    var ac_source = function(request, response){
+        var val = request.term.trim().split(',').pop().trim();
+        if (val == ''){
+            response([]);
+        }
+        var search_for = new RegExp(val, 'i');
+
+        var found = [];
+        $.each(emails, function(idx, elm){
+            if (elm.search(search_for)> -1){
+                found.push(elm);
+            }
+        });
+        response(found);
+    }
+    var ac_select = function( event, ui ) {
+        var terms = this.value.trim().split(',');
+        terms.pop();
+        terms.push( ui.item.value );
+        this.value = terms.join( ", " );
+        return false;
+    };
+
+    var ac_params = {'source': ac_source,
+                     'select': ac_select,
+                     'focus': function(){return false}}
+    $('#input_resource_notify_emails').autocomplete(ac_params);
+
+    // quick'n'dirty autoheight for text fields, 
+    // https://stackoverflow.com/a/10080841/35735
+    // http://jsfiddle.net/SpYk3/m8Qk9/
+    $(function() {
+        //  changes mouse cursor when highlighting loawer right of box
+        $(document).on('mousemove', 'textarea', function(e) {
+            var a = $(this).offset().top + $(this).outerHeight() - 16,	//	top border of bottom-right-corner-box area
+                b = $(this).offset().left + $(this).outerWidth() - 16;	//	left border of bottom-right-corner-box area
+            $(this).css({
+                cursor: e.pageY > a && e.pageX > b ? 'nw-resize' : ''
+            });
+        })
+        //  the following simple make the textbox "Auto-Expand" as it is typed in
+        .on('keyup', 'textarea', function(e) {
+            //  the following will help the text expand as typing takes place
+            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+                $(this).height($(this).height()+1);
+            };
+        });
+       $('textarea').trigger('keyup');
+    });
+
+
+
+    {% endif %}
+
+
+</script>
+{% endblock %}

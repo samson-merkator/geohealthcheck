@@ -1,0 +1,680 @@
+#
+# Translators:
+# Alejo C. Marcelo, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version:  GeoHealthCheck\n"
+"Report-Msgid-Bugs-To: https://github.com/geopython/GeoHealthCheck/issues\n"
+"POT-Creation-Date: 2019-07-19 16:20+0200\n"
+"PO-Revision-Date: 2016-06-13 19:01-0400\n"
+"Last-Translator: Alejo C. Marcelo\n"
+"Language: es_BO\n"
+"Language-Team: Español (Bolivia) "
+"<https://github.com/geopython/GeoHealthCheck>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: GeoHealthCheck/app.py:490
+msgid "This site is not configured for self-registration"
+msgstr "Este sitio no está configurado para auto-registrarse"
+
+#: GeoHealthCheck/app.py:491
+msgid "Please contact"
+msgstr "Por favor contactar"
+
+#: GeoHealthCheck/app.py:503
+msgid "Invalid username or email"
+msgstr ""
+
+#: GeoHealthCheck/app.py:516
+msgid "already registered"
+msgstr "ya registrado"
+
+#: GeoHealthCheck/app.py:539
+msgid "No resources detected"
+msgstr ""
+
+#: GeoHealthCheck/app.py:553
+msgid "Service already registered"
+msgstr "Servicio ya registrado"
+
+#: GeoHealthCheck/app.py:625
+msgid "Services registered"
+msgstr ""
+
+#: GeoHealthCheck/app.py:747 GeoHealthCheck/app.py:776
+#: GeoHealthCheck/app.py:804
+msgid "Resource not found"
+msgstr "Recurso no encontrado"
+
+#: GeoHealthCheck/app.py:756
+msgid "INFO"
+msgstr ""
+
+#: GeoHealthCheck/app.py:759 GeoHealthCheck/templates/edit_resource.html:440
+msgid "ERROR"
+msgstr "Error"
+
+#: GeoHealthCheck/app.py:762
+msgid "Resource tested successfully"
+msgstr "Recurso probado con éxito"
+
+#: GeoHealthCheck/app.py:798
+msgid "You do not have access to delete this resource"
+msgstr "Usted no tiene acceso para eliminar este recurso"
+
+#: GeoHealthCheck/app.py:812
+msgid "Resource deleted"
+msgstr "Recurso eliminado"
+
+#: GeoHealthCheck/app.py:896
+msgid "Invalid username and / or password"
+msgstr "Usuario y/o contraseña incorrecto"
+
+#: GeoHealthCheck/app.py:911
+msgid "Logged out"
+msgstr "Desconectado"
+
+#: GeoHealthCheck/app.py:932
+msgid "Invalid email"
+msgstr ""
+
+#: GeoHealthCheck/app.py:953
+msgid "reset password"
+msgstr ""
+
+#: GeoHealthCheck/app.py:968
+msgid "Password reset link sent via email"
+msgstr ""
+
+#: GeoHealthCheck/app.py:990
+msgid "Invalid token"
+msgstr ""
+
+#: GeoHealthCheck/app.py:1000
+msgid "Password required"
+msgstr ""
+
+#: GeoHealthCheck/app.py:1007
+msgid "Update password OK"
+msgstr ""
+
+#: GeoHealthCheck/healthcheck.py:140
+msgid "Invalid resource type"
+msgstr "Tipo de recurso no válido"
+
+#: GeoHealthCheck/healthcheck.py:216 GeoHealthCheck/healthcheck.py:246
+msgid "for"
+msgstr "para"
+
+#: GeoHealthCheck/notifications.py:239
+#: GeoHealthCheck/templates/status_report_email.txt:11
+#: GeoHealthCheck/templates/status_report_email.txt:14
+msgid "Failing"
+msgstr "Inactivo"
+
+#: GeoHealthCheck/notifications.py:241
+msgid "Fixed"
+msgstr "Corregido"
+
+#: GeoHealthCheck/notifications.py:243 GeoHealthCheck/notifications.py:251
+msgid "Still Failing"
+msgstr "Sigue inactivo"
+
+#: GeoHealthCheck/notifications.py:245 GeoHealthCheck/notifications.py:247
+msgid "Passing"
+msgstr "Activo"
+
+#: GeoHealthCheck/plugins/probe/ghcreport.py:115
+msgid "Status summary"
+msgstr ""
+
+#: GeoHealthCheck/templates/add.html:5
+msgid "Add Resource"
+msgstr "Agregar recurso"
+
+#: GeoHealthCheck/templates/add.html:8
+msgid "Select Resource Type"
+msgstr "Seleccionar tipo de recurso"
+
+#: GeoHealthCheck/templates/add.html:22
+msgid "Enter the URL without any query parameters"
+msgstr "Escriba la dirección URL sin parámetros de consulta"
+
+#: GeoHealthCheck/templates/add.html:22
+msgid "good"
+msgstr "bueno"
+
+#: GeoHealthCheck/templates/add.html:22
+msgid "bad"
+msgstr "malo"
+
+#: GeoHealthCheck/templates/add.html:28
+msgid "Submit"
+msgstr "Enviar"
+
+#: GeoHealthCheck/templates/add.html:39
+msgid "Enter tags"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:5
+#: GeoHealthCheck/templates/includes/probe_edit_form.html:125
+#: GeoHealthCheck/templates/resource.html:46
+msgid "Edit"
+msgstr "Editar"
+
+#: GeoHealthCheck/templates/edit_resource.html:10
+#: GeoHealthCheck/templates/includes/resources_list.html:4
+#: GeoHealthCheck/templates/resource.html:54
+msgid "Type"
+msgstr "Tipo"
+
+#: GeoHealthCheck/templates/edit_resource.html:15
+#: GeoHealthCheck/templates/resource.html:58
+msgid "Active"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:23
+msgid "Authentication"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:26
+msgid "Select optional authentication method and applicable credentials"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:67
+msgid "Notify emails"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:69
+msgid "You can enter multiple emails separated with comma"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:75
+msgid "Notify webhooks"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:88
+msgid "Enter url for webhook."
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:89
+msgid "Optionally, enter payload as list of key=value lines or JSON object."
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:110
+#: GeoHealthCheck/templates/resource.html:62
+#: GeoHealthCheck/templates/status_report_email.txt:19
+msgid "Owner"
+msgstr "Propietario"
+
+#: GeoHealthCheck/templates/edit_resource.html:115
+#: GeoHealthCheck/templates/includes/resources_list.html:5
+#: GeoHealthCheck/templates/resource.html:67
+msgid "Name"
+msgstr "Nombre"
+
+#: GeoHealthCheck/templates/edit_resource.html:136
+#: GeoHealthCheck/templates/resource.html:86
+msgid "Run Every"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:138
+#: GeoHealthCheck/templates/resource.html:88
+msgid "minutes"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:164
+#: GeoHealthCheck/templates/includes/resources_list.html:6
+#: GeoHealthCheck/templates/status_report_email.txt:8
+#: GeoHealthCheck/templates/status_report_email.txt:27
+msgid "Status"
+msgstr "Estado"
+
+#: GeoHealthCheck/templates/edit_resource.html:168
+#: GeoHealthCheck/templates/includes/resources_list.html:29
+#: GeoHealthCheck/templates/includes/resources_list.html:38
+#: GeoHealthCheck/templates/notification_email.txt:10
+#: GeoHealthCheck/templates/notification_email.txt:16
+#: GeoHealthCheck/templates/status_report_email.txt:20
+msgid "Details"
+msgstr "Detalles"
+
+#: GeoHealthCheck/templates/edit_resource.html:178
+#: GeoHealthCheck/templates/edit_resource.html:418
+#: GeoHealthCheck/templates/edit_resource.html:436
+msgid "Save"
+msgstr "Guardar"
+
+#: GeoHealthCheck/templates/edit_resource.html:179
+#: GeoHealthCheck/templates/edit_resource.html:449
+#: GeoHealthCheck/templates/edit_resource.html:457
+#: GeoHealthCheck/templates/edit_resource.html:464
+msgid "Test"
+msgstr ""
+
+#: GeoHealthCheck/templates/edit_resource.html:180
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: GeoHealthCheck/templates/edit_resource.html:181
+#: GeoHealthCheck/templates/includes/check_edit_form.html:12
+#: GeoHealthCheck/templates/includes/probe_edit_form.html:126
+#: GeoHealthCheck/templates/resource.html:47
+msgid "Delete"
+msgstr "Borrar"
+
+#: GeoHealthCheck/templates/edit_resource.html:484
+#: GeoHealthCheck/templates/resource.html:191
+msgid "Delete resource"
+msgstr "Eliminar recurso"
+
+#: GeoHealthCheck/templates/home.html:15
+msgid "Select a link on the left to view Resources."
+msgstr ""
+
+#: GeoHealthCheck/templates/home.html:17
+msgid "Failing Resources"
+msgstr ""
+
+#: GeoHealthCheck/templates/home.html:23
+#: GeoHealthCheck/templates/status_report_email.txt:22
+msgid "None"
+msgstr ""
+
+#: GeoHealthCheck/templates/includes/probe_edit_form.html:109
+#: GeoHealthCheck/templates/includes/probe_info.html:95
+#: GeoHealthCheck/templates/layout.html:40
+msgid "Add"
+msgstr "Agregar"
+
+#: GeoHealthCheck/templates/layout.html:55
+#: GeoHealthCheck/templates/login.html:5
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: GeoHealthCheck/templates/layout.html:58
+msgid "Language"
+msgstr ""
+
+#: GeoHealthCheck/templates/layout.html:65
+msgid "Help"
+msgstr "Ayuda"
+
+#: GeoHealthCheck/templates/layout.html:75
+msgid "Resource Types"
+msgstr "Tipos de recurso"
+
+#: GeoHealthCheck/templates/layout.html:84
+#: GeoHealthCheck/templates/layout.html:102
+msgid "Show All"
+msgstr "Mostrar todo"
+
+#: GeoHealthCheck/templates/layout.html:86
+msgid "Show Mine"
+msgstr ""
+
+#: GeoHealthCheck/templates/layout.html:93
+msgid "Tags"
+msgstr ""
+
+#: GeoHealthCheck/templates/layout.html:108
+msgid "Settings"
+msgstr "Configuración"
+
+#: GeoHealthCheck/templates/layout.html:110
+#: GeoHealthCheck/templates/resource.html:149
+msgid "History"
+msgstr "Historial"
+
+#: GeoHealthCheck/templates/layout.html:110
+msgid "days"
+msgstr "días"
+
+#: GeoHealthCheck/templates/layout.html:111
+msgid "Runner in Webapp"
+msgstr ""
+
+#: GeoHealthCheck/templates/layout.html:112
+msgid "Probe Timeout"
+msgstr ""
+
+#: GeoHealthCheck/templates/layout.html:113
+msgid "Minimal Run Freq"
+msgstr ""
+
+#: GeoHealthCheck/templates/layout.html:134
+#: GeoHealthCheck/templates/opensearch_description.xml:11
+msgid "Powered by"
+msgstr ""
+
+#: GeoHealthCheck/templates/login.html:7
+#: GeoHealthCheck/templates/register.html:8
+#: GeoHealthCheck/templates/reset_password_email.txt:9
+msgid "Username"
+msgstr "Usuario"
+
+#: GeoHealthCheck/templates/login.html:8
+#: GeoHealthCheck/templates/register.html:9
+#: GeoHealthCheck/templates/reset_password_form.html:7
+msgid "Password"
+msgstr "Contraseña"
+
+#: GeoHealthCheck/templates/login.html:11
+msgid "Sign in"
+msgstr "Registrarse"
+
+#: GeoHealthCheck/templates/login.html:15
+#: GeoHealthCheck/templates/register.html:6
+msgid "Register"
+msgstr "Registrar"
+
+#: GeoHealthCheck/templates/login.html:19
+msgid "Forgot password?"
+msgstr ""
+
+#: GeoHealthCheck/templates/login.html:23
+msgid "This app requires an authenticated user"
+msgstr ""
+
+#: GeoHealthCheck/templates/notification_email.txt:4
+#: GeoHealthCheck/templates/reset_password_email.txt:1
+msgid "Hi: this is an automated message from the"
+msgstr "Hola: Este es un mensaje automatico desde"
+
+#: GeoHealthCheck/templates/notification_email.txt:4
+#: GeoHealthCheck/templates/reset_password_email.txt:1
+#: GeoHealthCheck/templates/status_report_email.txt:1
+msgid "service"
+msgstr "Servicio"
+
+#: GeoHealthCheck/templates/notification_email.txt:6
+msgid "Resource"
+msgstr "Recurso"
+
+#: GeoHealthCheck/templates/notification_email.txt:7
+msgid "Resource type"
+msgstr "Tipo de recurso"
+
+#: GeoHealthCheck/templates/notification_email.txt:8
+msgid "Resource URL"
+msgstr "URL del recurso"
+
+#: GeoHealthCheck/templates/notification_email.txt:12
+#: GeoHealthCheck/templates/resource.html:156
+#: GeoHealthCheck/templates/resource.html:235
+msgid "Date"
+msgstr "Fecha"
+
+#: GeoHealthCheck/templates/notification_email.txt:14
+#: GeoHealthCheck/templates/resource.html:129
+#: GeoHealthCheck/templates/resource.html:164
+msgid "Message"
+msgstr "Mensaje"
+
+#: GeoHealthCheck/templates/register.html:10
+#: GeoHealthCheck/templates/reset_password_request.html:7
+msgid "Email"
+msgstr "Email"
+
+#: GeoHealthCheck/templates/register.html:13
+msgid "Signup"
+msgstr "Regístrate"
+
+#: GeoHealthCheck/templates/reset_password_email.txt:3
+msgid "You have requested to reset your password"
+msgstr ""
+
+#: GeoHealthCheck/templates/reset_password_email.txt:4
+msgid "Follow the link below to create a new password"
+msgstr ""
+
+#: GeoHealthCheck/templates/reset_password_email.txt:5
+msgid "Ignore this email if this was not initiated by you"
+msgstr ""
+
+#: GeoHealthCheck/templates/reset_password_email.txt:11
+msgid "Greetings from"
+msgstr ""
+
+#: GeoHealthCheck/templates/reset_password_form.html:5
+msgid "Enter new password"
+msgstr ""
+
+#: GeoHealthCheck/templates/reset_password_form.html:10
+msgid "Create"
+msgstr ""
+
+#: GeoHealthCheck/templates/reset_password_request.html:5
+msgid "Reset Password"
+msgstr ""
+
+#: GeoHealthCheck/templates/reset_password_request.html:10
+msgid "Reset password via email"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:44
+msgid "Test Now"
+msgstr "Probar ahora"
+
+#: GeoHealthCheck/templates/resource.html:102
+msgid "Response Times (seconds)"
+msgstr "Tiempos de respuesta (segundos)"
+
+#: GeoHealthCheck/templates/resource.html:105
+msgid "Min"
+msgstr "Min"
+
+#: GeoHealthCheck/templates/resource.html:106
+msgid "Average"
+msgstr "Promedio"
+
+#: GeoHealthCheck/templates/resource.html:107
+msgid "Max"
+msgstr "Máx"
+
+#: GeoHealthCheck/templates/includes/resources_list.html:7
+#: GeoHealthCheck/templates/resource.html:112
+#: GeoHealthCheck/templates/status_report_email.txt:12
+#: GeoHealthCheck/templates/status_report_email.txt:17
+msgid "Reliability"
+msgstr "Fiabilidad"
+
+#: GeoHealthCheck/templates/resource.html:124
+msgid "Last Run Result"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:127
+msgid "Last Check"
+msgstr "Ultima revisión"
+
+#: GeoHealthCheck/templates/resource.html:128
+msgid "Success"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:130
+msgid "Response Time"
+msgstr "Tiempo de respuesta"
+
+#: GeoHealthCheck/templates/resource.html:133
+msgid "No runs yet"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:135
+msgid "Last Run Summary"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:152
+msgid "Period"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:160
+#: GeoHealthCheck/templates/resource.html:235
+msgid "Duration"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:161
+msgid "Total Probe execution duration"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:165
+msgid "Hover mouse over plot to see Run Results here"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:168
+msgid "Full report"
+msgstr ""
+
+#: GeoHealthCheck/templates/resource.html:179
+msgid "Download"
+msgstr ""
+
+#: GeoHealthCheck/templates/resources.html:15
+#: GeoHealthCheck/templates/status_report_email.txt:9
+#: GeoHealthCheck/templates/status_report_email.txt:14
+msgid "Resources"
+msgstr "Recurso"
+
+#: GeoHealthCheck/templates/resources.html:18
+msgid "Search..."
+msgstr "Buscar..."
+
+#: GeoHealthCheck/templates/resources.html:20
+msgid "results"
+msgstr "resultados"
+
+#: GeoHealthCheck/templates/status_report_email.txt:1
+msgid "Hi: this is a status report sent by the"
+msgstr ""
+
+#: GeoHealthCheck/templates/status_report_email.txt:2
+msgid "at"
+msgstr ""
+
+#: GeoHealthCheck/templates/status_report_email.txt:2
+msgid "for the GeoHealthCheck endpoint at"
+msgstr ""
+
+#: GeoHealthCheck/templates/includes/overall_status.html:3
+#: GeoHealthCheck/templates/status_report_email.txt:4
+msgid "Monitoring Period"
+msgstr "Periodo de monitoreo"
+
+#: GeoHealthCheck/templates/status_report_email.txt:5
+msgid "From"
+msgstr ""
+
+#: GeoHealthCheck/templates/status_report_email.txt:6
+msgid "To"
+msgstr ""
+
+#: GeoHealthCheck/templates/includes/overall_status.html:20
+#: GeoHealthCheck/templates/status_report_email.txt:10
+msgid "Operational"
+msgstr "Operacional"
+
+#: GeoHealthCheck/templates/status_report_email.txt:18
+msgid "URL"
+msgstr ""
+
+#: GeoHealthCheck/templates/status_report_email.txt:23
+msgid "Links"
+msgstr ""
+
+#: GeoHealthCheck/templates/status_report_email.txt:24
+msgid "Home"
+msgstr ""
+
+#: GeoHealthCheck/templates/status_report_email.txt:25
+#: GeoHealthCheck/templates/status_report_email.txt:26
+msgid "Summary"
+msgstr ""
+
+#: GeoHealthCheck/templates/includes/overall_status.html:1
+msgid "Dashboard"
+msgstr "Tablero de control"
+
+#: GeoHealthCheck/templates/includes/overall_status.html:40
+msgid "Reliable"
+msgstr "Confiable"
+
+#: GeoHealthCheck/templates/includes/overall_status.html:61
+msgid "Broken"
+msgstr "Caido"
+
+#: GeoHealthCheck/templates/includes/probe_info.html:92
+msgid "Info"
+msgstr ""
+
+#~ msgid "Resource title"
+#~ msgstr "Título del recurso"
+
+#~ msgid "Title"
+#~ msgstr "Título  "
+
+#~ msgid "Add email to notify a problem"
+#~ msgstr "Adicione los correos para la notificación de problemas"
+
+#~ msgid "Notify email"
+#~ msgstr "Correo de notificación"
+
+#~ msgid "Logout"
+#~ msgstr "Salir"
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#~ msgid "Service registered"
+#~ msgstr "Servicio registrado"
+
+#~ msgid "View Details"
+#~ msgstr "Ver detalles"
+
+#~ msgid "Optionally, enter payload as list of key=value lines."
+#~ msgstr ""
+
+#~ msgid "You can enter multiple emails, separated with comma"
+#~ msgstr ""
+
+#~ msgid "Test Frequency"
+#~ msgstr "Frecuencia de pruebas"
+
+#~ msgid "Invalid username"
+#~ msgstr ""
+
+#~ msgid "Password sent via email"
+#~ msgstr ""
+
+#~ msgid "Cannot send email. Contact admin: GHC_ADMIN_EMAIL"
+#~ msgstr ""
+
+#~ msgid "Cannot send email. Contact admin: "
+#~ msgstr ""
+
+#~ msgid "Update password failed!"
+#~ msgstr ""
+
+#~ msgid "Recover Password"
+#~ msgstr ""
+
+#~ msgid "Recover password via email"
+#~ msgstr ""
+
+#~ msgid "Subject"
+#~ msgstr "Asunto"
+
+#~ msgid "recover password"
+#~ msgstr ""
+
+#~ msgid "Response Time (seconds)"
+#~ msgstr "Tiempo de respuesta (seg)"
+
+#~ msgid "Show"
+#~ msgstr ""
+
+#~ msgid "seconds"
+#~ msgstr "segundos"
+

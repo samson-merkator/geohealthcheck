@@ -1,0 +1,19 @@
+{{ result }}: {{ resource.title }}
+
+
+{{ _('Hi: this is an automated message from the') }} {{ config.GHC_SITE_TITLE }} {{ _('service') }}.
+
+{{ _('Resource') }}: {{ resource.title }}
+{{ _('Resource type') }}: {{ resource.resource_type }}
+{{ _('Resource URL') }}: {{ resource.url }}
+
+{{ _('Details') }}:
+
+{{ _('Date') }}: {{ resource.last_run.checked_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }} 
+
+{{ _('Message') }}: {{ resource.last_run.message }}
+
+{{ _('Details') }}: {{ config.GHC_SITE_URL }}/resource/{{resource.identifier}}
+
+{{ config.GHC_SITE_TITLE }}
+{{ config.GHC_SITE_URL }}
