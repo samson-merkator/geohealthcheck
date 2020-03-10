@@ -59,7 +59,7 @@ tweepy==3.6.0
 typed-ast==1.4.0
 urllib3==1.25.6
 virtualenv==16.7.5
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 wrapt==1.11.2
 WTForms==2.1
 zipfile36==0.1.3
